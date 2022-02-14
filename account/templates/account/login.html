@@ -1,0 +1,55 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block content %}
+        <!-- <div style="opacity: 0.8; border: 1px solid whitesmoke;  margin: 80px; font-weight: bold; "> -->
+
+            <div class="page-title-wrapper">
+                <div class="page-title-outher">
+                    <div class="page-title-inner">
+                        <span class="page-title-icon flaticon-pizza-slice"></span>
+                        <h1 class="page-title">{{page}}</h1>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            {% if page == 'register' %}
+            
+                <form action="{% url 'register' %}" method="POST">
+                    <div class="albertos-contact-form">
+                        <div class="page-wrapper">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="contact-submit">
+                                <input type="submit" value="Register" class="wpcf7-form-control wpcf7-submit"  id="submit_contact" />
+                            </div>
+                            <p> You already have an account? please <a href="{% url 'login' %}">Login</a> </p>
+                        </div>
+                    </div>
+                </form>
+            <div class="clear"></div>
+            {% else %}
+            
+                <form action="{% url 'login' %}" method="POST">
+                    <div class="albertos-contact-form">
+                        <div class="page-wrapper">
+                                {% csrf_token %}
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" class="form-control">
+                                
+                                <label for="password"   >password</label>
+                                <input type="password" name="password" id="password" class="form-control">
+                            <div class="contact-submit">
+                                <input type="submit" value="Login" class="wpcf7-form-control wpcf7-submit"  id="submit_contact" />
+                            </div>
+                            <p> You doesn't have an account? please <a href="{% url 'register' %}">Register</a> </p>
+                        </div>
+                    </div>
+                </form>
+
+            <div class="clear"></div>
+            {% endif%}
+            
+
+{% endblock  %}

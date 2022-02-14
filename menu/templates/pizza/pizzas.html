@@ -1,0 +1,56 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block content %}
+
+<div id="fullwidth-container">
+    <!-- start container -->
+    <div class="page-title-wrapper">
+        <div class="page-title-outher">
+            <div class="page-title-inner">
+                <span class="page-title-icon flaticon-pizza-slice"></span>
+                <h1 class="page-title">Pizzas</h1>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="page-wrapper">
+        <div class="offer-menu2-wrapper">
+            <div class="offer-menu2-items">
+                {% for pizza in pizzas %}
+                    <div class="offer-menu2-item-single">
+                        <img class="offer-menu2-frame" src="{% static 'images/frame.png' %}" />
+                        <div class="offer-menu2-shadow"></div>
+                        <div class="offer-menu2-thumb">
+                            <img class="offer-menu2-inner-frame" src="{% static 'images/inner-shadow.png' %}" />
+                        </div>
+                        <div class="offer-menu2-thumb-image"><img src="{{pizza.picture.url}}" width="313" height="220" alt="{{pizza.title}}" /></div>
+                        <div class="clear"></div>
+                        <span class="offer-menu2-icon flaticon-pizza-slice"></span>
+                        <div class="offer-menu2-details">
+                            <div class="single-offer-menu2-title">{{pizza.title}}</div>
+                            <div class="single-offer-menu2-content">
+                            <p>
+                                {% for ingred in pizza.ingredients.all|join:", " %}
+                                    {{ingred.title }}
+                                {% endfor %}
+                            </p>
+                            </div>
+                            <div class="single-offer-menu2-price">${{pizza.price}}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <!-- end page wrapper -->
+</div>
+
+
+
+    
+
+{% endblock  %}

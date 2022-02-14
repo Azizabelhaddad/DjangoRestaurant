@@ -1,0 +1,97 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block content %}
+
+
+                <!-- start container -->
+                <div class="page-title-wrapper">
+                    <div class="page-title-outher">
+                        <div class="page-title-inner">
+                            <span class="page-title-icon flaticon-pizza-slice"></span>
+                            <h1 class="page-title">Menu</h1>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <!-- <div class="clear"></div> -->
+                <div class="page-wrapper">
+                    <div class="offer-menu-wrapper">
+                        <ul id="filters" class="single-offer-category-filter option-set" data-option-key="filter">
+                            <li class="filter-cat"><a class="selected" href="#cat1" data-option-value=".cat1">Pizza</a></li>
+                            <li class="filter-cat"><a href="#cat2" data-option-value=".cat2">Pizza Slice</a></li>
+                            <li class="filter-cat"><a href="#cat3" data-option-value=".cat3">Pizza Rolls</a></li>
+                            <li class="filter-cat"><a href="#filter" data-option-value=".cat4">Box</a></li>
+                            <li class="filter-cat"><a href="#filter" data-option-value=".cat5">Topings</a></li>
+                        </ul>
+
+                        <div class="offer-menu-items" id ="cat1">
+                            {% for pizza in allpizza %}
+                                <div class="single-offer-category-item isotope-item cat1">
+                                    <div class="single-offer-item">
+                                        <div class="single-offer-details">
+                                            <div class="single-offer-title">{{pizza.title}}</div>
+                                            <div class="single-offer-content">
+                                                <ul>
+                                                    {% for ingred in pizza.ingredients.all|join:", " %}
+                                                        {{ingred.title}}
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="single-offer-price">${{pizza.price}}</div>
+                                        <div>
+                                            <form action="{% url 'addToCard' pizza.id %}" method="POST">
+
+                                                <button class="filter-cat" type="button" name="add" id="add">Add to Card</button>
+                                            </form>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                            {% endfor %}
+                            <div class="single-offer-category-item isotope-item cat2" id = "cat2">
+                                    {% for slice in slicepizza %}
+                                        <div class="single-offer-item">
+                                            <div class="single-offer-details">
+                                                <div class="single-offer-title">{{slice.title}}</div>
+                                                <div class="single-offer-content">
+                                                    {% for ingred in slice.ingredients.all|join:", " %}
+                                                        {{ingred.title}}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="single-offer-price">${{slice.price}}</div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                <div class="single-offer-category-item isotope-item cat3" id = "cat3">
+                                    {% for roll in rollpizza %}
+                                        <div class="single-offer-item">
+                                            <div class="single-offer-details">
+                                                <div class="single-offer-title">{{roll.title}}</div>
+                                                <div class="single-offer-content">
+                                                    {% for ingred in roll.ingredients.all|join:", " %}
+                                                        {{ingred.title}}
+                                                {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="single-offer-price">${{roll.price}}</div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                               
+                            </div>
+                            
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <!-- end page wrapper -->
+           
+
+
+    
+
+{% endblock  %}
